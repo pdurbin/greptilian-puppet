@@ -56,6 +56,12 @@ class server1 {
     mode   => '0444',
   }
 
+  file { '/etc/httpd/conf.d/welcome.conf':
+    source => 'puppet:///server1/etc/httpd/conf.d/welcome.conf',
+    owner  => 'puppet',
+    group  => 'puppet',
+    mode   => '0444',
+  }
 
   file { '/etc/httpd/conf.d/yum.greptilian.com.conf':
     source => 'puppet:///server1/etc/httpd/conf.d/yum.greptilian.com.conf',
