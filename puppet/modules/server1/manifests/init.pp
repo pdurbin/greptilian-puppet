@@ -49,8 +49,23 @@ class server1 {
     mode   => '0444',
   }
 
+  file { '/etc/httpd/conf.d/0greptilian.conf':
+    source => 'puppet:///server1/etc/httpd/conf.d/0greptilian.conf',
+    owner  => 'puppet',
+    group  => 'puppet',
+    mode   => '0444',
+  }
+
+
   file { '/etc/httpd/conf.d/yum.greptilian.com.conf':
     source => 'puppet:///server1/etc/httpd/conf.d/yum.greptilian.com.conf',
+    owner  => 'puppet',
+    group  => 'puppet',
+    mode   => '0444',
+  }
+
+  file { '/etc/httpd/conf.d/git.greptilian.com.conf':
+    source => 'puppet:///server1/etc/httpd/conf.d/git.greptilian.com.conf',
     owner  => 'puppet',
     group  => 'puppet',
     mode   => '0444',
