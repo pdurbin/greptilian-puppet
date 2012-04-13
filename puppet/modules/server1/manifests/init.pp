@@ -2,6 +2,7 @@ class server1 {
 
   $server1_packages = [
     'git',
+    'bind-utils',
     'vim-enhanced',
     'screen',
     'rpm-build',
@@ -10,6 +11,9 @@ class server1 {
     'createrepo',
     'httpd',
     'gitweb',
+    'epel-release',
+    'salt-master',
+    'salt-minion',
   ]
 
   package { $server1_packages:
@@ -39,48 +43,48 @@ class server1 {
     source => 'puppet:///server1/etc/gitweb.conf',
     owner  => 'root',
     group  => 'root',
-    mode   => '0644',
+    mode   => '0444',
   }
 
   file { '/etc/yum.repos.d/greptilian.repo':
     source => 'puppet:///server1/etc/yum.repos.d/greptilian.repo',
-    owner  => 'puppet',
-    group  => 'puppet',
+    owner  => 'root',
+    group  => 'root',
     mode   => '0444',
   }
 
   file { '/etc/httpd/conf.d/0greptilian.conf':
     source => 'puppet:///server1/etc/httpd/conf.d/0greptilian.conf',
-    owner  => 'puppet',
-    group  => 'puppet',
+    owner  => 'root',
+    group  => 'root',
     mode   => '0444',
   }
 
   file { '/etc/httpd/conf.d/welcome.conf':
     source => 'puppet:///server1/etc/httpd/conf.d/welcome.conf',
-    owner  => 'puppet',
-    group  => 'puppet',
+    owner  => 'root',
+    group  => 'root',
     mode   => '0444',
   }
 
   file { '/etc/httpd/conf.d/yum.greptilian.com.conf':
     source => 'puppet:///server1/etc/httpd/conf.d/yum.greptilian.com.conf',
-    owner  => 'puppet',
-    group  => 'puppet',
+    owner  => 'root',
+    group  => 'root',
     mode   => '0444',
   }
 
   file { '/etc/httpd/conf.d/git.greptilian.com.conf':
     source => 'puppet:///server1/etc/httpd/conf.d/git.greptilian.com.conf',
-    owner  => 'puppet',
-    group  => 'puppet',
+    owner  => 'root',
+    group  => 'root',
     mode   => '0444',
   }
 
   file { '/usr/sbin/server1-puppet-apply.sh':
     source => 'puppet:///server1/usr/sbin/server1-puppet-apply.sh',
-    owner  => 'puppet',
-    group  => 'puppet',
+    owner  => 'root',
+    group  => 'root',
     mode   => '0555',
   }
 
