@@ -27,8 +27,7 @@ if ( !$project_list ) {
 
 my @projects = split( /\n/, $project_list );
 for my $project_bare (@projects) {
-    $project_bare =~ s/\s+$//;
-    my ($project_local) = split( /[.]git$/, $project_bare );
+    my ($project_local) = $project_bare =~ /^(.*?)[.]git/;
     if ( chdir($project_local) ) {
         printf( 'cd %-30s', "$project_local... " );
         #say glob($FILES_NON_DOT);
