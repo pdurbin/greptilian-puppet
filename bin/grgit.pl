@@ -9,6 +9,7 @@ use Data::Dumper;
 use IPC::Open3 'open3';
 
 Readonly my $GIT_SERVER     => 'git.greptilian.com';
+Readonly my $GIT_USER       => 'pdurbin';
 Readonly my $PROJECT_INDEX  => "http://$GIT_SERVER/?a=project_index";
 Readonly my $PROJECT_DIR    => '/var/lib/git';
 Readonly my $LOCAL_GIT_DIR  => "$ENV{HOME}/gr";
@@ -42,6 +43,6 @@ for my $project_bare (@projects) {
     }
     else {
         print
-"Could not cd to $project_local. Clone with:\ngit clone $GIT_CLONE_PATH/$project_bare\n;";
+"Could not cd to $project_local. Clone with:\ngit clone $GIT_USER\@$GIT_CLONE_PATH/$project_bare\n;";
     }
 }
