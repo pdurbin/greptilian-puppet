@@ -35,8 +35,7 @@ for my $project_bare (@projects) {
         open3( $writer, $reader, $err, 'git pull' );
         while ( my $line = <$reader> ) {
             print {*STDOUT} $line
-              unless $line =~
-/^Address 72.93.243.251 maps to vps.v2s.org, but this does not map back to the address - POSSIBLE BREAK-IN ATTEMPT!\s*$/;
+              unless $line =~ /POSSIBLE BREAK-IN ATTEMPT/;
         }
         chdir($DOTDOT);
     }
