@@ -41,6 +41,6 @@ for my $project_bare (@projects) {
     }
     else {
         print
-"Could not cd to $project_local. Clone with:\ngit clone $GIT_USER\@$GIT_CLONE_PATH/$project_local.git\n;";
+"Could not cd to $project_local. Clone with:\ngit clone $GIT_USER\@$GIT_CLONE_PATH/$project_local.git\n";
     }
 }
