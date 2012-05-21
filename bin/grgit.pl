@@ -7,6 +7,7 @@ use Readonly;
 use Carp;
 use Data::Dumper;
 use IPC::Open3 'open3';
+use YAML;
 
 Readonly my $GIT_SERVER     => 'git.greptilian.com';
 Readonly my $GIT_USER       => 'pdurbin';
@@ -16,6 +17,8 @@ Readonly my $LOCAL_GIT_DIR  => "$ENV{HOME}/gr";
 Readonly my $GIT_CLONE_PATH => "$GIT_SERVER:$PROJECT_DIR";
 Readonly my $DOTDOT         => q{..};
 Readonly my $FILES_NON_DOT  => q{*};
+Readonly my $DESCRIPTIONS =>
+"http://$GIT_SERVER/?p=wiki.git;a=blob_plain;f=greptilian.com/git/repos.mdwn;hb=HEAD";
 
 chdir($LOCAL_GIT_DIR) or croak "Couldn't cd to $LOCAL_GIT_DIR";
 
@@ -23,6 +26,19 @@ my $project_list = get($PROJECT_INDEX);
 
 if ( !$project_list ) {
     croak "Couldn't download project index from $PROJECT_INDEX";
+}
+
+my $descriptions = get($DESCRIPTIONS);
+
+if ( !$descriptions ) {
+    croak "Couldn't download git repo descriptions from $DESCRIPTIONS";
+}
+
+#print $descriptions;
+my $desc_dd = Load($descriptions);
+#print Dumper $desc_dd;
+for my $repo ( keys %$desc_dd ) {
+    #print $repo;
 }
 
 my @projects = split( /\n/, $project_list );
