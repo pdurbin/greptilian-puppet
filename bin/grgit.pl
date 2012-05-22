@@ -28,21 +28,22 @@ if ( !$project_list ) {
     croak "Couldn't download project index from $PROJECT_INDEX";
 }
 
-my $descriptions = get($DESCRIPTIONS);
-
-if ( !$descriptions ) {
-    croak "Couldn't download git repo descriptions from $DESCRIPTIONS";
-}
-
-#print $descriptions;
-my $desc_dd = Load($descriptions);
-#print Dumper $desc_dd;
-for my $repo ( keys %$desc_dd ) {
-    #print $repo;
-}
-
 my @projects = split( /\n/, $project_list );
+s{^\s+|\s+$}{}g for @projects;
+
+my $descriptions_yaml = get($DESCRIPTIONS);
+
+if ( !$descriptions_yaml ) {
+    croak "Couldn't download git repo descriptions_yaml from $DESCRIPTIONS";
+}
+
+my $proj_descriptions = Load($descriptions_yaml);
+for my $repo ( keys %{$proj_descriptions} ) {
+    carp "No description for $repo at $DESCRIPTIONS" unless ($repo ~~ @projects);
+}
+
 for my $project_bare (@projects) {
+    carp "No description for $project_bare at $DESCRIPTIONS" unless ${$proj_descriptions}{$project_bare};
     my ($project_local) = $project_bare =~ /^(.*?)[.]git/;
     if ( chdir($project_local) ) {
         printf( 'cd %-30s', "$project_local... " );
