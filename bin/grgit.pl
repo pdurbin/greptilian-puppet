@@ -1,11 +1,10 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 use strict;
 use warnings;
 use 5.010000;
 use Readonly;
 use Carp;
 use LWP::Simple qw{get};
-use Git;
 use YAML;
 #use Data::Dumper;
 
@@ -47,7 +46,7 @@ for my $project_bare (sort @projects) {
     my ($project_local) = $project_bare =~ /^(.*?)[.]git/;
     if ( chdir($project_local) ) {
         printf( '%-30s', "$project_local... " );
-        git_cmd_try { Git::command_noisy('pull') } '%s failed w/ code %d';
+        system('git pull');
         chdir($DOTDOT);
     }
     else {
